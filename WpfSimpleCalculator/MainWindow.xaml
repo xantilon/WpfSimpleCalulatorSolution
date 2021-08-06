@@ -1,0 +1,89 @@
+﻿<Window x:Class="WpfSimpleCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSimpleCalculator"
+        mc:Ignorable="d"
+        Title="WpfCalcSimple" Height="440" Width="295">
+
+    <DockPanel Grid.ColumnSpan="3" Margin="5 5">
+
+        <DockPanel.Resources>
+            <local:LCD x:Key="mainLCD" />
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="MinWidth" Value="60"/>
+                <Setter Property="MinHeight" Value="50"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="TextWrapping" Value="NoWrap"           />
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="Background" Value="#FFD7ECD8"/>
+                <Setter Property="Foreground" Value="#FF22461A"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="TextAlignment" Value="Right" />
+                <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
+            </Style>
+        </DockPanel.Resources>
+        <DockPanel.DataContext>
+            <Binding Source="{StaticResource mainLCD}"/>
+        </DockPanel.DataContext>
+        <TextBox x:Name="LcdBox" DockPanel.Dock="Top"            
+                TargetUpdated="OnTargetUpdated" 
+                Text="{Binding Mode=OneWay, NotifyOnTargetUpdated=True, Path=Display}"/>
+
+        <StackPanel 
+                 DockPanel.Dock="Top" 
+                Orientation="Vertical">
+
+            <DockPanel >
+                <Button Content="%" Tag="%" Click="Button_Click"  />
+                <Button Content="CE" Tag="c"  Click="Button_Click" />
+                <Button Content="C" Tag="C" Click="Button_Click" />
+                <Button Content="÷" Tag="÷" Click="Button_Click" />
+            </DockPanel>                  
+            <DockPanel >                  
+                <Button Content="7" Tag="7" Click="Button_Click" />
+                <Button Content="8" Tag="8" Click="Button_Click" />
+                <Button Content="9" Tag="9" Click="Button_Click" />
+                <Button Content="x" Tag="x" Click="Button_Click" />
+            </DockPanel>                  
+            <DockPanel >                  
+                <Button Content="4" Tag="4" Click="Button_Click" />
+                <Button Content="5" Tag="5" Click="Button_Click" />
+                <Button Content="6" Tag="6" Click="Button_Click" />
+                <Button Content="–" Tag="–" Click="Button_Click" />
+            </DockPanel>                  
+            <DockPanel >                  
+                <Button Content="1" Tag="1" Click="Button_Click" />
+                <Button Content="2" Tag="2" Click="Button_Click" />
+                <Button Content="3" Tag="3" Click="Button_Click" />
+                <Button Content="+" Tag="+" Click="Button_Click" />
+            </DockPanel>                  
+            <DockPanel >                  
+                <Button Content="±" Tag="±" Click="Button_Click" />
+                <Button Content="0" Tag="0" Click="Button_Click" />
+                <Button Content="," Tag="." Click="Button_Click" />
+                <Button Content="=" Tag="=" Click="Button_Click" />
+            </DockPanel>
+        </StackPanel>
+        <TextBox x:Name="LcdBox2" 
+                     DockPanel.Dock="Bottom"/>
+        <TextBlock x:Name="Messages" HorizontalAlignment="Stretch" MinHeight="30"/>
+    </DockPanel>
+
+
+
+
+</Window>
