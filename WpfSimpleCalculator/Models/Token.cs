@@ -11,5 +11,15 @@ namespace WpfSimpleCalculator.Models
         public eTokenType TokenType { get; set; }
         public decimal Number { get; set; }
         public eOperator Operator { get; set; }
+
+        public override string ToString()
+        {
+            if (TokenType == eTokenType.Operator)
+                return ((char)Operator).ToString();
+           
+                
+            return Number.ToString();
+           
+        }
     }
 }

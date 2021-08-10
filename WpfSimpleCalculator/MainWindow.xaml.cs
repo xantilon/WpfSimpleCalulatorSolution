@@ -14,8 +14,8 @@ namespace WpfSimpleCalculator
         private Tokenizer tokenizer = new Tokenizer();
         private static string errorMessage = "";
         public LCD MainLCD { get; set; } = new LCD();
-        private Calculator calc = new Calculator(ref errorMessage);
-        private Calculator calc2 = new Calculator(ref errorMessage);
+        private Calculator calc = new Calculator();
+        private Calculator calc2 = new Calculator();
 
         public MainWindow()
         {
@@ -49,38 +49,16 @@ namespace WpfSimpleCalculator
             var bindingExpression = BindingOperations.GetBindingExpression(LcdBox, TextBox.TextProperty);
             var lcd = (LCD)bindingExpression.DataItem;
 
-            if (Calculator.IsDigit(buttonContent))
-            {
-                lcd.AddInput(buttonContent);
-            }
-            else
-            {
-                var tok = Tokenizer.Parse(buttonContent);
-                if (tok != null)
-                {
-                    calc.AddInput(lcd.GetNumber(), tok);
-                    lcd.SetNumber(calc.DoWork());
-                    lcd.Message = errorMessage;
-                }
-            }
+            calc.AddInput(buttonContent);
+            calc.DoWork();
+            calc.SetDisplay(lcd);
             ////////////////////////////////////////////////////////////////////////////////////////
 
             ////////////////////////////////////////////////////////////////////////////////////////
             // LOWER DISPLAY: binding LCD2 from code behind
-            if (Calculator.IsDigit(buttonContent))
-            {
-                MainLCD.AddInput(buttonContent);
-            }
-            else
-            {
-                var tok = Tokenizer.Parse(buttonContent);
-                if (tok != null)
-                {
-                    calc2.AddInput(MainLCD.GetNumber(), tok);
-                    MainLCD.SetNumber(calc2.DoWork());
-                    MainLCD.Message = errorMessage;
-                }
-            }
+            calc2.AddInput(buttonContent);
+            calc2.DoWork();
+            calc2.SetDisplay(MainLCD);
             ////////////////////////////////////////////////////////////////////////////////////////
         }
 
