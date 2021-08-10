@@ -10,7 +10,7 @@
     <DockPanel Grid.ColumnSpan="3" Margin="5 5">
 
         <DockPanel.Resources>
-            <local:LCD x:Key="mainLCD" />
+            <!--<local:LCD x:Key="mainLCD" />-->
             <Style TargetType="{x:Type Button}">
                 <Setter Property="MinWidth" Value="60"/>
                 <Setter Property="MinHeight" Value="50"/>
@@ -36,19 +36,20 @@
                 <Setter Property="VerticalScrollBarVisibility" Value="Disabled" />
             </Style>
         </DockPanel.Resources>
-        <DockPanel.DataContext>
+        <!--<DockPanel.DataContext>
             <Binding Source="{StaticResource mainLCD}"/>
-        </DockPanel.DataContext>
-        <TextBox x:Name="LcdBox" DockPanel.Dock="Top"            
+        </DockPanel.DataContext>-->
+        <!--<TextBox x:Name="LcdBox" DockPanel.Dock="Top"            
                 TargetUpdated="OnTargetUpdated" 
-                Text="{Binding Mode=OneWay, NotifyOnTargetUpdated=True, Path=Display}"/>
+                Text="{Binding Mode=OneWay, NotifyOnTargetUpdated=True, Path=Display}"/>-->
+        <TextBox x:Name="LcdBox2" DockPanel.Dock="Top" Text="0,00"/>
 
         <StackPanel 
                  DockPanel.Dock="Top" 
                 Orientation="Vertical">
 
             <DockPanel >
-                <Button Content="%" Tag="%" Click="Button_Click"  />
+                <Button Content="%" Tag="%" Click="Button_Click" IsEnabled="False" />
                 <Button Content="CE" Tag="c"  Click="Button_Click" />
                 <Button Content="C" Tag="C" Click="Button_Click" />
                 <Button Content="÷" Tag="÷" Click="Button_Click" />
@@ -78,9 +79,8 @@
                 <Button Content="=" Tag="=" Click="Button_Click" />
             </DockPanel>
         </StackPanel>
-        <TextBox x:Name="LcdBox2" 
-                     DockPanel.Dock="Bottom"/>
-        <TextBlock x:Name="Messages" HorizontalAlignment="Stretch" MinHeight="30"/>
+        <TextBlock x:Name="Messages" HorizontalAlignment="Stretch" />
+        <TextBlock x:Name="Queue" HorizontalAlignment="Stretch"/>
     </DockPanel>
 
 

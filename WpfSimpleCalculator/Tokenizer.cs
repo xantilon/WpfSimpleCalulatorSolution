@@ -10,9 +10,8 @@ namespace WpfSimpleCalculator
 {
     public class Tokenizer
     {
-        private static char[] _digits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',' };
-
-        private string digitList = "0";
+        private string digitList = "";
+        private decimal num = 0m;
 
         public static Token Parse(string input)
         {
@@ -48,18 +47,23 @@ namespace WpfSimpleCalculator
                 case "7":
                 case "8":
                 case "9":
-                    if (digitList == "0")
-                        digitList = "";
-                    digitList += digit;
+                    if (digitList.Length < 12)
+                    {
+                        if (digitList == "0")
+                            digitList = "";
+                        digitList += digit;
+                    }
                     break;
                 case "c":
+                    num = 0;
                     if (digitList.Length > 1)
                     {
-                        digitList.Substring(0, digitList.Length - 1);
+                        digitList = digitList.Substring(0, digitList.Length - 1);
+                        if(digitList == "-") digitList = "";
                     }
                     else
                     {
-                        digitList = "0";
+                        digitList = "";
                     }
                     break;
                 case ".":
@@ -69,7 +73,8 @@ namespace WpfSimpleCalculator
                 case "±":
                     if (digitList.Length == 0 || digitList == "0")
                     {
-                        //lcd.SetNumber(-lcd.GetNumber().Number);
+                        digitList = (-num).ToString(CultureInfo.InvariantCulture.NumberFormat);
+                        num = 0;
                         break;
                     }
                     if (digitList.StartsWith("-"))
@@ -86,11 +91,13 @@ namespace WpfSimpleCalculator
 
         public Token GetNumber()
         {
-            decimal.TryParse(digitList, out decimal num);
-            digitList = "0";
+            if(!string.IsNullOrEmpty(digitList) )//&& digitList != "0")
+                decimal.TryParse(digitList, NumberStyles.Float, CultureInfo.InvariantCulture, out num);
+            digitList = "";
             return new Token { Number = num, TokenType = eTokenType.Number };
         }
-
-        public string GetDigitlist() => digitList;
+        public void SetNumber(decimal? number) => num = number??0m;
+       
+            public string GetDigitlist() => digitList;
     }
 }

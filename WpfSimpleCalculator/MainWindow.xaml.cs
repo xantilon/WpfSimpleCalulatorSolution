@@ -10,12 +10,9 @@ namespace WpfSimpleCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private Tokenizer tokenizer = new Tokenizer();
-        private static string errorMessage = "";
         public LCD MainLCD { get; set; } = new LCD();
-        private Calculator calc = new Calculator();
-        private Calculator calc2 = new Calculator();
+        //private readonly Calculator calc = new();
+        private readonly Calculator calc2 = new();
 
         public MainWindow()
         {
@@ -37,6 +34,10 @@ namespace WpfSimpleCalculator
             // bind a textBlock for error/status messages
             var msgBinding = new Binding("Message") { Source = MainLCD };
             Messages.SetBinding(TextBlock.TextProperty, msgBinding);
+
+            // bind a textBlock for curr messages
+            var queueBinding = new Binding("Queue") { Source = calc2 };
+            Messages.SetBinding(TextBlock.TextProperty, queueBinding);
         }
 
 
@@ -46,12 +47,12 @@ namespace WpfSimpleCalculator
 
             ////////////////////////////////////////////////////////////////////////////////////////
             //UPPER DISPLAY: if LCD is instantiated from XAML, get instance from event source
-            var bindingExpression = BindingOperations.GetBindingExpression(LcdBox, TextBox.TextProperty);
-            var lcd = (LCD)bindingExpression.DataItem;
+            //var bindingExpression = BindingOperations.GetBindingExpression(LcdBox, TextBox.TextProperty);
+            //var lcd = (LCD)bindingExpression.DataItem;
 
-            calc.AddInput(buttonContent);
-            calc.DoWork();
-            calc.SetDisplay(lcd);
+            //calc.AddInput(buttonContent);
+            //calc.DoWork();
+            //calc.SetDisplay(lcd);
             ////////////////////////////////////////////////////////////////////////////////////////
 
             ////////////////////////////////////////////////////////////////////////////////////////

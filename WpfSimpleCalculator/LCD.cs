@@ -22,7 +22,13 @@ namespace WpfSimpleCalculator
             get
             {
                 if (string.IsNullOrEmpty(digitList))
-                    return number.ToString("N2", new CultureInfo("de_DE").NumberFormat);
+                {
+                    //return number.ToString("N3", new CultureInfo("de_DE").NumberFormat);
+                    string numberFormatted = number.ToString("0.###########", new CultureInfo("de_DE").NumberFormat);
+                    if (number == Math.Floor(number))
+                        numberFormatted += "."; 
+                    return numberFormatted;
+                }
                 return Format(digitList);
             }
         }
