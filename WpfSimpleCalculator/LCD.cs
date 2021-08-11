@@ -48,7 +48,7 @@ namespace WpfSimpleCalculator
                 NumberGroupSeparator = "."
             };
             var splits = ret.Split(',');
-            int i = int.Parse(splits[0]);
+            var i = Int64.Parse(splits[0]);
             ret = i.ToString("N", nfi); // "1.234.567.890"            
             if (splits.Length > 1)
                 ret += $",{splits[1]}";

@@ -12,14 +12,6 @@ namespace WpfSimpleCalculator.Models
         public decimal Number { get; set; }
         public eOperator Operator { get; set; }
 
-        public override string ToString()
-        {
-            if (TokenType == eTokenType.Operator)
-                return ((char)Operator).ToString();
-           
-                
-            return Number.ToString();
-           
-        }
+        public override string ToString() => (TokenType == eTokenType.Operator) ? $"[{(char)Operator}]" : $"[{Number}]";        
     }
 }

@@ -146,7 +146,7 @@ namespace WpfSimpleCalculator
         }
 
 
-        public string Queue => $"queue: [{string.Join("] [", inputQueue.Select(q => q.ToString()).ToList())}]";
+        public string Queue => $"queue: {string.Join(' ',inputQueue.Select(q => q.ToString()))}";
 
 
 
